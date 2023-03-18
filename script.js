@@ -1,24 +1,48 @@
-confirm("Let's play Rock, Paper, Scissors!")
+var wins = 0
+var ties = 0
+var losses = 0
 
-var userChoice = prompt("Do you choose R, P, or S")
+var options = ["R", "P", "S"]
 
-var computerChoice = Math.random()
+var game = function() {
+    confirm("Let's play Rock, Paper, Scissors!")
 
-console.log(userChoice)
-console.log(computerChoice)
+    var userChoice = window.prompt("Do you choose R, P, or S")
 
-//turn random number into actual choice
-if (computerChoice <= 0.33) {
-    computerChoice = "R"
-} else if (computerChoice <= 0.67) {
-    computerChoice = "P"
-} else {
-    computerChoice = "S"
-}
-
-function game () {
-    if (userChoice.toUpperCase === computerChoice) {
-        alert( "Draw" )
+    if (!userChoice) {
+        return
     }
-    else if ()
+
+    userChoice = userChoice.toUpperCase()
+    var index = Math.floor(Math.random() * options.length)
+    var computerChoice = options[index]
+
+    window.alert("The computer chooses " + computerChoice)
+
+    if (userChoice === computerChoice) {
+        ties++
+        window.alert("Tie!")
+    } else if (
+        (userChoice === "R" && computerChoice === "S") || 
+        (userChoice === "P" && computerChoice === "R") || 
+        (userChoice === "S" && computerChoice === "P") 
+    ) {
+        wins++
+        window.alert("Win!")
+    } else {
+        losses++
+        window.alert("Loss!")
+    }
+    console.log(userChoice)
+    console.log(computerChoice)
+
+    window.alert("Stats:\nWins: " + wins + "\nLosses: " + losses + "\nTies: " + ties)
+
+    var playAgain = window.confirm("Play again?")
+
+    if (playAgain) {
+        game()
+    }
 }
+
+game()
